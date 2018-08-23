@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace DotNetFun
 {
@@ -75,6 +76,67 @@ namespace DotNetFun
                 }
             }
             return count;
+        }
+
+        public static bool AlmostIncreasingSequence(int[] sequence)
+        {
+
+            int a, b, c,d=0;
+
+            for (int i = 0; i < sequence.Length - 2 && d <= 2; i++)
+            {
+                a = sequence[i];
+                b = sequence[i + 1];
+                c = sequence[i + 2];
+
+                if (a >= b)
+                {
+                    d++;
+                    sequence[i] = b - 1;
+                }
+                if (b >= c)
+                {
+                    d++;
+                    if (a == c)
+                    {
+                        sequence[i + 2] = b + 1;
+                    }
+                    else
+                    {
+                        sequence[i + 1] = a;
+                    }
+                }
+            }
+            return d <= 1;
+        }
+
+        //Each kilometre you travel takes a certain amount of time - initially, it's initialTimePerKm, but with each additional kilometre travelled, the time per km goes up by timeIncreasePerKm. 
+        //The time it takes to pump up the tire is timeToRefill, and the total number of kilometres you need to travel is represented by distance. 
+        //Each refill brings the time per km back to initialTimePerKm.
+
+        public static int SlowLeak(int distance, int initialTimePerKm, int timeIncreasePerKm, int timeToRefill)
+        {
+            return 6;
+        }
+
+        public static int MatrixElementsSum(int[][] matrix)
+        {
+            int rooms = 0;
+            for (int rows = 0; rows < matrix.Length; rows++)
+            {
+                for (int cols = 0; cols < matrix[rows].Length; cols++)
+                {
+                    if (rows > 0 && matrix[rows - 1][cols] == 0)
+                    {
+                        //make room below a haunted one a no-go
+                        matrix[rows][cols] = 0;
+                    }
+                    rooms += matrix[rows][cols];
+                }
+            }
+
+            return rooms;
+
         }
     }
 }

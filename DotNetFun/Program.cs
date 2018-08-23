@@ -45,11 +45,22 @@ namespace DotNetFun
             //Wizard Harry = new Wizard("Harry", 2);
             //Console.WriteLine(Harry.CastSpell(1));
 
-            int[] inputArray = { -23, 4, -3, 8, -12 };
-            Numbers.AdjacentElementsProduct(inputArray);
+            //int[] inputArray = { -23, 4, -3, 8, -12 };
+            //Numbers.AdjacentElementsProduct(inputArray);
 
-            int[] statueArray = {10, 101};
-            Console.WriteLine(Numbers.makeArrayConsecutive2(statueArray));
+            //int[] statueArray = {10, 101};
+            //Console.WriteLine(Numbers.makeArrayConsecutive2(statueArray));
+
+
+            int[] seq = { 10, 1, 2, 3, 4, 5 };
+            int[] seq2 = { 0, -2, 5, 6 };
+            int[] seq3 = { 123, -17, -5, 1, 2, 3, 12, 43, 45 };
+            Console.WriteLine(Numbers.AlmostIncreasingSequence(seq3));
+
+            string s1s = "aabcc";
+            string s2 = "adcaa";
+
+            Strings.CommonCharacterCount(s1s, s2);
 
             Console.ReadLine();
         }
