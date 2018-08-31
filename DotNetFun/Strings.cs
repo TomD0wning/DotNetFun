@@ -50,10 +50,10 @@ namespace DotNetFun
         }
 
 
-       
+
         public static string[] AllLongestStrings(string[] inputArray)
         {
-       
+
             int stringLength = int.MinValue;
 
             foreach (string s in inputArray)
@@ -65,36 +65,54 @@ namespace DotNetFun
             var lengths = from v in inputArray
                           where v.Length == stringLength
                           select v;
-                                
+
             return lengths.ToArray<string>();
-
-            //List<string> outputList = new List<string>();
-            //int stringLength = int.MinValue;
-
-            //foreach (string s in inputArray)
-            //{
-            //    if (s.Length > stringLength)
-            //        stringLength = s.Length;
-            //}
-
-            //foreach (string ss in inputArray)
-            //{
-            //    if (ss.Length == stringLength)
-            //        outputList.Add(ss);
-
-            //}
-
-            //return outputList.ToArray<string>();
 
         }
 
         public static int CommonCharacterCount(string s1, string s2)
         {
-            //not quite right - only counts common instances of a char, not how many of the common char there are.
-            var res = s1.ToList<char>().Intersect(s2.ToList<char>()).Count<char>();
-            Console.WriteLine(res);
+            int common = 0;
 
-            return res;
+            for (int i = 0; i < s1.Length; i++)
+            {
+                for (int j = 0; j < s2.Length; j++)
+                {
+                    if (s1[i] == s2[j])
+                    {
+                        s2 = s2.Remove(j, 1);
+                        common++;
+                        break;
+                    }
+                }
             }
+
+            return common;
+        }
+
+        /*
+         * You have a string s that consists of English letters, punctuation marks, whitespace characters, and brackets. It is guaranteed that the parentheses in s form a regular bracket sequence.
+         * Your task is to reverse the strings contained in each pair of matching parentheses, starting from the innermost pair. The results string should not contain any parentheses.
+         * Example
+         * For string s = "a(bc)de", the output should be
+         * reverseParentheses(s) = "acbde".
+         */
+
+        public static string ReverseParentheses(string s)
+        {
+
+            //var b = (from v in a orderby v ascending where v != -1 select v).ToList();
+
+            StringBuilder sb = new StringBuilder();
+
+
+            string[] c = s.Split('(', ')');
+
+            
+
+
+        }
+
     }
 }
+ 

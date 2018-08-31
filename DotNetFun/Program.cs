@@ -52,15 +52,17 @@ namespace DotNetFun
             //Console.WriteLine(Numbers.makeArrayConsecutive2(statueArray));
 
 
-            int[] seq = { 10, 1, 2, 3, 4, 5 };
-            int[] seq2 = { 0, -2, 5, 6 };
-            int[] seq3 = { 123, -17, -5, 1, 2, 3, 12, 43, 45 };
-            Console.WriteLine(Numbers.AlmostIncreasingSequence(seq3));
+            //int[] seq = { 10, 1, 2, 3, 4, 5 };
+            //int[] seq2 = { 0, -2, 5, 6 };
+            //int[] seq3 = { 123, -17, -5, 1, 2, 3, 12, 43, 45 };
+            //Console.WriteLine(Numbers.AlmostIncreasingSequence(seq3));
 
-            string s1s = "aabcc";
-            string s2 = "adcaa";
+            //string s1s = "aabcc";
+            //string s2 = "adcaa";
 
-            Strings.CommonCharacterCount(s1s, s2);
+            //Strings.CommonCharacterCount(s1s, s2);
+
+            Console.WriteLine(Numbers.IsLucky(1230));
 
             Console.ReadLine();
         }

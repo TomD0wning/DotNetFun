@@ -18,6 +18,11 @@ namespace DotNetFun
             return x.Equals(y);
         }
 
+        public static bool Modulo(int n){
+            return Math.DivRem(n, 2, out int res) == 0 ? true : false;
+
+        }
+
         public static int AdjacentElementsProduct(int[] inputArray)
         {
             //Find the largest product of adjacent elements from an input array.
@@ -54,7 +59,7 @@ namespace DotNetFun
         //2,3,6,8
         //makeArrayConsecutive2(statues) = 3.
         //Ratiorg needs statues of sizes 4, 5 and 7.
-        public static int makeArrayConsecutive2(int[] statues)
+        public static int MakeArrayConsecutive2(int[] statues)
         {
 
             List<int> statueList = new List<int>();
@@ -137,6 +142,51 @@ namespace DotNetFun
 
             return rooms;
 
+        }
+
+//Ticket numbers usually consist of an even number of digits.
+//A ticket number is considered lucky if the sum of the first half of the digits is equal to the sum of 
+//the second half.
+//Given a ticket number n, determine if it's lucky or not.
+//Example
+//For n = 1230, the output should be
+//isLucky(n) = true;
+//For n = 239017, the output should be
+//isLucky(n) = false.
+
+        public static bool IsLucky(int n)
+        {
+            char[] arr = n.ToString().ToArray();
+            int firstHalf = 0;
+            int secondHalf = 0;
+            for (int i = 0; i < (arr.Length/2); i++)
+            {
+                firstHalf += arr[i];
+                secondHalf += arr[(arr.Length / 2) + i];
+
+            }
+            return firstHalf == secondHalf ? true : false;
+        }
+
+        /* Example
+         * For a = [-1, 150, 190, 170, -1, -1, 160, 180], the output should be
+         * sortByHeight(a) = [-1, 150, 160, 170, -1, -1, 180, 190].
+         * If a[i] = -1, then the ith position is occupied by a tree. Otherwise a[i] is the height of a 
+         * person standing in the ith position.
+         */
+
+        public static int[] SortByHeight(int[] a){
+
+            var b = (from v in a orderby v ascending where v != -1 select v).ToList();
+            //var b = a.OrderBy(i => i).ToList<int>();
+            for (int i = 0; i < a.Length; i++)
+            {
+                if(a[i] == -1){
+                    b.Insert(i, a[i]);
+                }
+
+            }
+            return b.ToArray<int>();
         }
     }
 }
