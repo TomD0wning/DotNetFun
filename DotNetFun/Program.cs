@@ -62,7 +62,9 @@ namespace DotNetFun
 
             //Strings.CommonCharacterCount(s1s, s2);
 
-            Console.WriteLine(Numbers.IsLucky(1230));
+            //Console.WriteLine(Numbers.IsLucky(1230));
+
+            Strings.ReverseParentheses("a(bc)de");
 
             Console.ReadLine();
         }

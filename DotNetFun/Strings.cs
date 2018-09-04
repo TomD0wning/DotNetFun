@@ -109,7 +109,14 @@ namespace DotNetFun
             string[] c = s.Split('(', ')');
 
             
+            for (int i = 0; i < c.Length -1; i++)
+            {
 
+                Console.WriteLine(c[i]);
+            }
+
+
+            return "a";
 
         }
 
