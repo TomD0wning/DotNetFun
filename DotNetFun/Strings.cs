@@ -100,25 +100,70 @@ namespace DotNetFun
 
         public static string ReverseParentheses(string s)
         {
+            return reverse(s);
+        }
 
-            //var b = (from v in a orderby v ascending where v != -1 select v).ToList();
-
-            StringBuilder sb = new StringBuilder();
-
-
-            string[] c = s.Split('(', ')');
-
-            
-            for (int i = 0; i < c.Length -1; i++)
+            public static string reverse(string s)
             {
-
-                Console.WriteLine(c[i]);
+                var l = s.LastIndexOf('(');
+                if (l == -1) return s;
+                var r = s.IndexOf(')', l);
+                var arr = s.Substring(l + 1, r - l - 1).ToCharArray();
+                Array.Reverse(arr);
+                return reverse(s.Substring(0, l) + new string(arr) + s.Substring(r + 1));
             }
 
 
-            return "a";
+        /*
+         * Given a rectangular matrix of characters, add a border of asterisks(*) to it.
+         * Example - For picture = ["abc",
+         *                          "ded"]
+         * the output should be
+         * addBorder(picture) = ["*****",
+         *                       "*abc*",
+         *                       "*ded*",
+         *                       "*****"]
+         */
+                //picture: ["abcde",
+                // "fghij",
+                // "klmno",
+                // "pqrst",
+                // "uvwxy"]
+                //        Output:
+
+                //["*******",
+                 //"*abcde*",
+                 //"*fghij*",
+                 //"*klmno*",
+                 //"*pqrst*",
+                 //"*uvwxy*",
+                 //"*******"]
+
+
+        public static string[] AddBorder(string[] picture)
+        {
+            //Work out length of elements
+            int borderLength = picture[0].Count();
+
+
+            for (int i = 0; i < borderLength; i++)
+            {
+
+            }
+            string[] border;
+
+            foreach(var v in picture){
+
+            }
+
+
+
+
+
 
         }
+
+
 
     }
 }

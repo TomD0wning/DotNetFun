@@ -64,7 +64,10 @@ namespace DotNetFun
 
             //Console.WriteLine(Numbers.IsLucky(1230));
 
-            Strings.ReverseParentheses("a(bc)de");
+            //Console.WriteLine(Strings.ReverseParentheses("a(bc)de"));
+
+            int[] a = {50, 60, 60, 45, 70};
+            Console.WriteLine(Numbers.AlternatingSums(a));
 
             Console.ReadLine();
         }
