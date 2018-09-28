@@ -124,47 +124,40 @@ namespace DotNetFun
          *                       "*ded*",
          *                       "*****"]
          */
-                //picture: ["abcde",
-                // "fghij",
-                // "klmno",
-                // "pqrst",
-                // "uvwxy"]
-                //        Output:
+        //picture: ["abcde",
+        // "fghij",
+        // "klmno",
+        // "pqrst",
+        // "uvwxy"]
+        //        Output:
 
-                //["*******",
-                 //"*abcde*",
-                 //"*fghij*",
-                 //"*klmno*",
-                 //"*pqrst*",
-                 //"*uvwxy*",
-                 //"*******"]
+        //["*******",
+        //"*abcde*",
+        //"*fghij*",
+        //"*klmno*",
+        //"*pqrst*",
+        //"*uvwxy*",
+        //"*******"]
 
 
         public static string[] AddBorder(string[] picture)
         {
-            //Work out length of elements
-            int borderLength = picture[0].Count();
+            String[] pictureBorder = new String[picture.Length + 2];
+            pictureBorder[0] = "";
+            pictureBorder[pictureBorder.Length - 1] = "";
 
-
-            for (int i = 0; i < borderLength; i++)
+            for (int i = 0; i < picture[0].Length + 2; i++)
             {
+                pictureBorder[0] += '*';
+                pictureBorder[pictureBorder.Length - 1] += '*';
 
             }
-            string[] border;
-
-            foreach(var v in picture){
-
+            for (int i = 1; i < pictureBorder.Length - 1; i++)
+            {
+                pictureBorder[i] = "*" + picture[i - 1] + "*";
             }
-
-
-
-
-
-
+                return pictureBorder;
         }
-
-
-
     }
 }
  

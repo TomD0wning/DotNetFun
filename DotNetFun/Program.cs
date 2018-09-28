@@ -69,6 +69,9 @@ namespace DotNetFun
             int[] a = {50, 60, 60, 45, 70};
             Console.WriteLine(Numbers.AlternatingSums(a));
 
+            string[] b = { "abc", "ded" };
+            Console.WriteLine(Strings.AddBorder(b));
+
             Console.ReadLine();
         }
     }
