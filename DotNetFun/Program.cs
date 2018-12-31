@@ -66,11 +66,20 @@ namespace DotNetFun
 
             //Console.WriteLine(Strings.ReverseParentheses("a(bc)de"));
 
-            int[] a = {50, 60, 60, 45, 70};
-            Console.WriteLine(Numbers.AlternatingSums(a));
+            //int[] a = {50, 60, 60, 45, 70};
+            //Console.WriteLine(Numbers.AlternatingSums(a));
 
-            string[] b = { "abc", "ded" };
-            Console.WriteLine(Strings.AddBorder(b));
+            //string[] b = { "abc", "ded" };
+            //Console.WriteLine(Strings.AddBorder(b));
+
+            //int[] a = { 1, 2, 3 };
+            //int[] b = { 1,2,3 };
+
+            //Console.WriteLine(Numbers.AreSimilier(a, b));
+
+
+            Strings.ShortestPassword("../keylogger.txt");
+
 
             Console.ReadLine();
         }

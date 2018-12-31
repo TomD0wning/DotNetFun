@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.IO;
+using System.Net;
 
 namespace DotNetFun
 {
@@ -100,17 +102,12 @@ namespace DotNetFun
 
         public static string ReverseParentheses(string s)
         {
-            return reverse(s);
-        }
-
-            public static string reverse(string s)
-            {
                 var l = s.LastIndexOf('(');
                 if (l == -1) return s;
                 var r = s.IndexOf(')', l);
                 var arr = s.Substring(l + 1, r - l - 1).ToCharArray();
                 Array.Reverse(arr);
-                return reverse(s.Substring(0, l) + new string(arr) + s.Substring(r + 1));
+                return s.Substring(0, l) + new string(arr) + s.Substring(r + 1);
             }
 
 
@@ -157,6 +154,39 @@ namespace DotNetFun
                 pictureBorder[i] = "*" + picture[i - 1] + "*";
             }
                 return pictureBorder;
+        }
+
+        public static void ShortestPassword(string keyFile)
+        {
+
+
+            using (StreamReader sr = new StreamReader(File.OpenRead(keyFile)))
+            {
+
+                var keyArray = sr.ReadToEnd().Split("\n\r");
+
+                var found = false;
+                var index = 10000000; // I chose this as a starting point because I can see the count of unique numbers
+                var answer = "";
+                while (!found)
+                {
+                    answer = (index++).ToString();
+
+                    // The Linq All method takes advantage of short-circuit evaluation.
+                    // As soon as any number is matched the while will progress
+                    found = keyArray.All(x =>
+                    answer.IndexOf(x[0]) != -1 &&
+                    answer.IndexOf(x[1]) != -1 &&
+                    answer.IndexOf(x[2]) != -1 &&
+
+                    answer.IndexOf(x[0]) < answer.IndexOf(x[1]) &&
+                    answer.IndexOf(x[1]) < answer.IndexOf(x[2])
+                );
+                }
+
+                Console.WriteLine(answer);
+                Console.Read();
+            }
         }
     }
 }
