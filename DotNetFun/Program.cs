@@ -45,6 +45,8 @@ namespace DotNetFun
             //Wizard Harry = new Wizard("Harry", 2);
             //Console.WriteLine(Harry.CastSpell(1));
 
+
+            #region codingChallenges
             //int[] inputArray = { -23, 4, -3, 8, -12 };
             //Numbers.AdjacentElementsProduct(inputArray);
 
@@ -72,16 +74,19 @@ namespace DotNetFun
             //string[] b = { "abc", "ded" };
             //Console.WriteLine(Strings.AddBorder(b));
 
-            //int[] a = { 1, 2, 3 };
-            //int[] b = { 1,2,3 };
-
-            //Console.WriteLine(Numbers.AreSimilier(a, b));
-
-
-            Strings.ShortestPassword("../keylogger.txt");
+            // int[] a = {1, 4, 2, 5, 3, 7, 4, 8, 4, 2, 25};
+            // int[] b = {1, 4, 2, 5, 3, 3, 7, 8, 4, 2, 25};
+            // Console.WriteLine(Numbers.AreSimilier(a, b));
 
 
-            Console.ReadLine();
+            int[] inputArray = {1,1,1};
+            System.Console.WriteLine($"\nMoveCount: {Numbers.arrayChange(inputArray)}");
+            
+            //Strings.ShortestPassword("../keylogger.txt");
+
+            #endregion
+
+            // Console.ReadLine();
         }
     }
 }

@@ -110,7 +110,6 @@ namespace DotNetFun
                 return s.Substring(0, l) + new string(arr) + s.Substring(r + 1);
             }
 
-
         /*
          * Given a rectangular matrix of characters, add a border of asterisks(*) to it.
          * Example - For picture = ["abc",
@@ -135,8 +134,6 @@ namespace DotNetFun
         //"*pqrst*",
         //"*uvwxy*",
         //"*******"]
-
-
         public static string[] AddBorder(string[] picture)
         {
             String[] pictureBorder = new String[picture.Length + 2];
@@ -158,11 +155,8 @@ namespace DotNetFun
 
         public static void ShortestPassword(string keyFile)
         {
-
-
             using (StreamReader sr = new StreamReader(File.OpenRead(keyFile)))
             {
-
                 var keyArray = sr.ReadToEnd().Split("\n\r");
 
                 var found = false;
@@ -187,6 +181,25 @@ namespace DotNetFun
                 Console.WriteLine(answer);
                 Console.Read();
             }
+        }
+
+        /*
+        Given a string, find out if its characters can be rearranged to form a palindrome.
+        Example
+        For inputString = "aabb", the output should be
+        palindromeRearranging(inputString) = true.
+        We can rearrange "aabb" to make "abba", which is a palindrome.
+        A string consisting of lowercase English letters.
+
+        Guaranteed constraints:
+        1 ≤ inputString.length ≤ 50.
+        [output] boolean
+        true if the characters of the inputString can be rearranged to form a palindrome, false otherwise.
+        */
+        bool palindromeRearranging(string inputString) 
+        {
+            //TODO
+            return true;
         }
     }
 }
