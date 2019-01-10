@@ -79,10 +79,26 @@ namespace DotNetFun
             // Console.WriteLine(Numbers.AreSimilier(a, b));
 
 
-            int[] inputArray = {1,1,1};
-            System.Console.WriteLine($"\nMoveCount: {Numbers.arrayChange(inputArray)}");
+            // int[] inputArray = {1,1,1};
+            // System.Console.WriteLine($"\nMoveCount: {Numbers.arrayChange(inputArray)}");
             
             //Strings.ShortestPassword("../keylogger.txt");
+
+            // string stringToRearrange = "aabb";
+            // System.Console.WriteLine(Strings.palindromeRearranging(stringToRearrange));
+            
+            // int yourLeft = 10;
+            // int yourRight = 5; 
+            // int friendsLeft = 5; 
+            // int friendsRight = 9;
+            // System.Console.WriteLine(Numbers.areEquallyStrong(yourLeft, yourRight,friendsLeft,friendsRight));
+
+            // int[] arrayMaxDifference = {2, 4, 1, 0};
+            // System.Console.WriteLine(Numbers.arrayMaximalAdjacentDifference(arrayMaxDifference));
+
+            string ipAddress = "192.168.0.1";
+            System.Console.WriteLine(Strings.isIPv4Address(ipAddress));
+
 
             #endregion
 
