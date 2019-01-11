@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Linq;
 using System.IO;
 using System.Net;
@@ -100,14 +101,16 @@ namespace DotNetFun
          * reverseParentheses(s) = "acbde".
          */
 
-        public static string ReverseParentheses(string s)
+        public static string ReverseParentheses(string inputString)
         {
-                var l = s.LastIndexOf('(');
-                if (l == -1) return s;
-                var r = s.IndexOf(')', l);
-                var arr = s.Substring(l + 1, r - l - 1).ToCharArray();
-                Array.Reverse(arr);
-                return s.Substring(0, l) + new string(arr) + s.Substring(r + 1);
+            while(inputString.Contains("("))
+            {
+            int i = inputString.LastIndexOf("(");
+            var s = new string(inputString.Skip(i + 1).TakeWhile(x => x != ')').Reverse().ToArray());
+            var t = "(" + new string(s.Reverse().ToArray()) + ")";
+            inputString = inputString.Replace(t, s);
+            }
+            return inputString;
             }
 
         /*
@@ -225,7 +228,22 @@ namespace DotNetFun
          */
 
          public static bool isIPv4Address(string inputString) {
+        
+             //using regex
+            Regex r = new Regex("^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$");
+            return r.IsMatch(inputString);
 
+            //non regex
+            //  var ipArray = inputString.Split('.');
+            //  if(ipArray.Length != 4)
+            //  return false;
+
+            //  for (int i = 0; i < ipArray.Length; i++)
+            //  {
+            //      if(int.Parse(ipArray[i]) < 0 && int.Parse(ipArray[i]) > 255)
+            //      return false;
+            //  }
+            //  return true;
         }
 
 

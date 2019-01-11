@@ -1,14 +1,13 @@
 ﻿using System;
 
-
-
-
 namespace DotNetFun
 {
     class Program
     {
         static void Main(string[] args)
         {
+
+            #region equality
             //Console.WriteLine("Hello, lets look at some basics");
 
             //Console.WriteLine("\n--------Equality--------");
@@ -35,18 +34,22 @@ namespace DotNetFun
             //Console.WriteLine("Equality method: " + Strings.AreStringsEqualMethod(x, y));
             //Console.WriteLine("Using Reference: " + Strings.AreStringsEqualRef(x, y));
 
+            #endregion
+            
+            #region wizarding
+            //Console.WriteLine("\n----You're a Wizard Harry-----");
+
+            //Wizard Harry = new Wizard("Harry", 2);
+            //Console.WriteLine(Harry.CastSpell(1));
+            #endregion
+
+            #region codingChallenges
+
             //Console.WriteLine("\nIs 'aba' a palindrome? " + Strings.CheckPalindrome("aba"));
             //Console.WriteLine("\nIs 'bacca' a palindrome? " + Strings.CheckPalindrome("bacca"));
             //Console.WriteLine("\nIs 'acca' a palindrome? " + Strings.CheckPalindrome("acca"));
             //Console.WriteLine("\nIs 'z' a palindrome? " + Strings.CheckPalindrome("z"));
 
-            //Console.WriteLine("\n----You're a Wizard Harry-----");
-
-            //Wizard Harry = new Wizard("Harry", 2);
-            //Console.WriteLine(Harry.CastSpell(1));
-
-
-            #region codingChallenges
             //int[] inputArray = { -23, 4, -3, 8, -12 };
             //Numbers.AdjacentElementsProduct(inputArray);
 
@@ -66,7 +69,7 @@ namespace DotNetFun
 
             //Console.WriteLine(Numbers.IsLucky(1230));
 
-            //Console.WriteLine(Strings.ReverseParentheses("a(bc)de"));
+            //Console.WriteLine(Strings.ReverseParentheses("foo(bar(baz))blim"));
 
             //int[] a = {50, 60, 60, 45, 70};
             //Console.WriteLine(Numbers.AlternatingSums(a));
@@ -96,13 +99,13 @@ namespace DotNetFun
             // int[] arrayMaxDifference = {2, 4, 1, 0};
             // System.Console.WriteLine(Numbers.arrayMaximalAdjacentDifference(arrayMaxDifference));
 
-            string ipAddress = "192.168.0.1";
-            System.Console.WriteLine(Strings.isIPv4Address(ipAddress));
+            // string ipAddress = "192.168.0.1";
+            // System.Console.WriteLine(Strings.isIPv4Address(ipAddress));
 
+            int[] obstacles = {5, 3, 6, 7, 9};
+            System.Console.WriteLine(Numbers.avoidObstacles(obstacles));
 
             #endregion
-
-            // Console.ReadLine();
         }
     }
 }
