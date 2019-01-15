@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace DotNetFun
 {
@@ -102,10 +104,45 @@ namespace DotNetFun
             // string ipAddress = "192.168.0.1";
             // System.Console.WriteLine(Strings.isIPv4Address(ipAddress));
 
-            int[] obstacles = {5, 3, 6, 7, 9};
-            System.Console.WriteLine(Numbers.avoidObstacles(obstacles));
+            // int[] obstacles = {5, 3, 6, 7, 9};
+            // System.Console.WriteLine(Numbers.avoidObstacles(obstacles));
+            #endregion
+
+
+            #region LinqPractice
+            string filePath = "/Users/tomp.downing/Downloads";
+            FileOperations.ShowLargeFiles(filePath);
+            System.Console.WriteLine("\n**********************\n");
+            FileOperations.ShowLargeFilesWithLinq(filePath);
+
+            //create some instances of Employee
+            IEnumerable<Employee> devs = new Employee[]{
+            new Employee{Id = 1, Name="Tom"},
+            new Employee{Id =2, Name="Scott"}};
+
+            IEnumerable<Employee> sales = new List<Employee>(){
+                new Employee {Id = 3, Name="Alex"}};
+            System.Console.WriteLine("\n**********************\n");
+            LinqPractice.IEnumeratorExample(devs);
+            
+            System.Console.WriteLine("\n**********************\n");
+            foreach (var item in devs.Where(LinqPractice.NameStartsWithS))
+            {
+                System.Console.WriteLine(item.Name);
+            }
+
+            LinqPractice.PrintWhereNameStartsWithS(devs);
+
+            LinqPractice.PrintNameUsingLamda(devs);
+
+            System.Console.WriteLine("\n**********************\n");
+
+            System.Console.WriteLine(LinqPractice.square(3));
+            LinqPractice.write(LinqPractice.square(LinqPractice.add(3,5)));
+
 
             #endregion
+
         }
     }
 }
