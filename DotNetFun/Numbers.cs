@@ -402,7 +402,7 @@ namespace DotNetFun
         result.
         */
         // public static int[][] boxBlur(int[][] image) {
-          
+            
         // }       
     }
 }

@@ -35,7 +35,6 @@ namespace DotNetFun
             //Console.WriteLine("Using Operators: " + Strings.AreStringsEqualOp(x,y));
             //Console.WriteLine("Equality method: " + Strings.AreStringsEqualMethod(x, y));
             //Console.WriteLine("Using Reference: " + Strings.AreStringsEqualRef(x, y));
-
             #endregion
             
             #region wizarding
@@ -110,36 +109,62 @@ namespace DotNetFun
 
 
             #region LinqPractice
-            string filePath = "/Users/tomp.downing/Downloads";
-            FileOperations.ShowLargeFiles(filePath);
-            System.Console.WriteLine("\n**********************\n");
-            FileOperations.ShowLargeFilesWithLinq(filePath);
+            // string filePath = "/Users/tomp.downing/Downloads";
+            // FileOperations.ShowLargeFiles(filePath);
+            // System.Console.WriteLine("\n**********************\n");
+            // FileOperations.ShowLargeFilesWithLinq(filePath);
 
-            //create some instances of Employee
-            IEnumerable<Employee> devs = new Employee[]{
-            new Employee{Id = 1, Name="Tom"},
-            new Employee{Id =2, Name="Scott"}};
+            // //create some instances of Employee
+            // IEnumerable<Employee> devs = new Employee[]{
+            // new Employee{Id = 1, Name="Tom"},
+            // new Employee{Id =2, Name="Scott"}};
 
-            IEnumerable<Employee> sales = new List<Employee>(){
-                new Employee {Id = 3, Name="Alex"}};
-            System.Console.WriteLine("\n**********************\n");
-            LinqPractice.IEnumeratorExample(devs);
+            // IEnumerable<Employee> sales = new List<Employee>(){
+            //     new Employee {Id = 3, Name="Alex"}};
+            // System.Console.WriteLine("\n**********************\n");
+            // LinqPractice.IEnumeratorExample(devs);
+            
+            // System.Console.WriteLine("\n**********************\n");
+            // foreach (var item in devs.Where(LinqPractice.NameStartsWithS))
+            // {
+            //     System.Console.WriteLine(item.Name);
+            // }
+
+            // LinqPractice.PrintWhereNameStartsWithS(devs);
+
+            // LinqPractice.PrintNameUsingLamda(devs);
+
+            // System.Console.WriteLine("\n**********************\n");
+            // System.Console.WriteLine(LinqPractice.square(3));
+            // LinqPractice.write(LinqPractice.square(LinqPractice.add(3,5)));
+
+            // System.Console.WriteLine("\n**********************\n");
+            // LinqPractice.FilterMovies();
+
+            // System.Console.WriteLine("\n**********************\n");
+            // LinqPractice.QueryInfinity();
+
+            // System.Console.WriteLine("\n**********************\n");
+            var cars = FileOperations.ProcessFuelFile("../fuel.csv");
+
+            // LinqPractice.QueryFuelFile(cars);
+
+            // System.Console.WriteLine("\n**********************\n");
+            // LinqPractice.FlattenDataWithSelectMany(cars);
+            
+            // System.Console.WriteLine("\n**********************\n");
+            var manufacturers = FileOperations.ProcessManufacturerFile("../manufacturers.csv");
+
+            // LinqPractice.JoiningDataSetsWithCompositeKey(cars,manufacturers);
+            
+            // System.Console.WriteLine("\n**********************\n");
+            // LinqPractice.GroupingData(cars,manufacturers);
+            
+            // System.Console.WriteLine("\n**********************\n");
+            // LinqPractice.GroupJoinData(cars, manufacturers);
             
             System.Console.WriteLine("\n**********************\n");
-            foreach (var item in devs.Where(LinqPractice.NameStartsWithS))
-            {
-                System.Console.WriteLine(item.Name);
-            }
-
-            LinqPractice.PrintWhereNameStartsWithS(devs);
-
-            LinqPractice.PrintNameUsingLamda(devs);
-
-            System.Console.WriteLine("\n**********************\n");
-
-            System.Console.WriteLine(LinqPractice.square(3));
-            LinqPractice.write(LinqPractice.square(LinqPractice.add(3,5)));
-
+            LinqPractice.FuelEffciencyByCountry(cars, manufacturers);
 
             #endregion
 

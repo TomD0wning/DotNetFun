@@ -36,7 +36,174 @@ namespace DotNetFun
                 System.Console.WriteLine(employee.Name);
             }
         }
-        //Examples of using Func & Action with lamda
+
+        public static void FilterMovies(){
+                 
+        var movies = new List<Movie>{
+            new Movie {Title="The Dark Knight", Rating=8.9f,Year=2008},
+            new Movie {Title="The Kings Speech", Rating=6.4f,Year=2013},
+            new Movie {Title="Commando", Rating=3.5f,Year=1989},
+            new Movie {Title="Star Wars IV", Rating=9.9f,Year=1974}
+            };
+
+            var query = movies.Filter(m => m.Year > 2000);
+
+            foreach (var movie in query)
+            {
+             System.Console.WriteLine(movie.Title);   
+            }
+        }
+            //Using an infinate loop from Random, query and take 10 numbers where n > .5
+            public static void QueryInfinity(){
+                var numbers = MyLinq.Random().Where(n => n > 0.5).Take(10);
+                foreach(var num in numbers){
+                    System.Console.WriteLine(num);
+                }
+        }
+
+        public static void QueryFuelFile(List<Car> cars){
+
+            var query = cars.Where(c => c.Manufacturer == "BMW" && c.Year == 2016)
+                            .OrderByDescending(c => c.Combined)
+                            .ThenBy(c => c.Name)
+                            .Select(c => c);
+
+            var result = cars.Any(c => c.Manufacturer == "Ford");
+
+             System.Console.WriteLine(result); 
+            foreach (var car in query.Take(10))
+            {
+                System.Console.WriteLine($"{car.Name}: {car.Combined}");
+            }
+        }
+
+        public static void FlattenDataWithSelectMany(List<Car> cars){
+
+            var result = cars.SelectMany(c => c.Name);
+    
+            foreach (var character in result)
+            {
+                System.Console.WriteLine(character);
+            }
+        }
+
+        public static void JoiningDataSets(List<Car> cars, List<Manufacturer> manufacturers){
+            
+            //Using query syntax
+            var query = 
+                        from car in cars 
+                        join m in manufacturers on car.Manufacturer equals m.Name
+                        orderby car.Combined descending, car.Name ascending
+                        select new {
+                            m.Headquarters,
+                            car.Name,
+                            car.Combined
+                        };
+
+            //using extension method syntax
+            var query2 = cars.Join(manufacturers, c => c.Manufacturer, m => m.Name, (c,m) => new {
+                            m.Headquarters,
+                            c.Name,
+                            c.Combined
+                        })
+                        .OrderByDescending(c => c.Combined)
+                        .ThenBy(c => c.Name);
+
+            foreach (var car in query.Take(10)){
+                System.Console.WriteLine($"{car.Headquarters} {car.Name} {car.Combined}");
+            }
+            
+            System.Console.WriteLine("\n");
+
+            foreach (var car in query2.Take(10)){
+                System.Console.WriteLine($"{car.Headquarters} {car.Name} {car.Combined}");
+            }
+        }
+
+        public static void JoiningDataSetsWithCompositeKey(List<Car> cars, List<Manufacturer> manufacturers){
+                        
+            //Using query syntax
+            var query = 
+                        from car in cars 
+                        join m in manufacturers on new {car.Manufacturer, car.Year} equals new {Manufacturer = m.Name, m.Year}
+                        orderby car.Combined descending, car.Name ascending
+                        select new {
+                            m.Headquarters,
+                            car.Name,
+                            car.Combined
+                        };
+
+            //using extension method syntax
+            var query2 = cars.Join(manufacturers, c => new {c.Manufacturer, c.Year} , m => new {Manufacturer = m.Name, m.Year}, (c,m) => new {
+                            m.Headquarters,
+                            c.Name,
+                            c.Combined
+                        })
+                        .OrderByDescending(c => c.Combined)
+                        .ThenBy(c => c.Name);
+
+            foreach (var car in query.Take(10)){
+                System.Console.WriteLine($"{car.Headquarters} {car.Name} {car.Combined}");
+            }
+            
+            System.Console.WriteLine("\n");
+
+            foreach (var car in query2.Take(10)){
+                System.Console.WriteLine($"{car.Headquarters} {car.Name} {car.Combined}");
+            }
+        }
+
+        public static void GroupingData(List<Car> cars, List<Manufacturer> manufacturers){
+            var query = from car in cars 
+                        group car by car.Manufacturer.ToUpper() into m
+                        orderby m.Key
+                        select m;
+
+            var query2 = cars.GroupBy(c => c.Manufacturer.ToUpper())
+                                .OrderBy(g => g.Key);
+
+            foreach (var group in query2)
+            {
+                System.Console.WriteLine(group.Key);
+                foreach (var car in group.OrderByDescending(c => c.Combined).Take(2))
+                {
+                    System.Console.WriteLine($"\t{car.Name}: {car.Combined}");
+                }
+            }
+        }
+
+        public static void GroupJoinData(List<Car> cars, List<Manufacturer> manufacturers){
+            
+            var query = from m in manufacturers
+                        join c in cars on m.Name equals c.Manufacturer
+                            into carGroup
+                        select new {
+                            Manufacturer = m,
+                            Cars = carGroup
+                        };
+
+            var query2 = manufacturers.GroupJoin(cars, m => m.Name, c => c.Manufacturer, 
+                                        (m,g) => new{
+                                            Manufacturer = m,
+                                            Cars = g
+                                            }).OrderBy(m => m.Manufacturer.Name); 
+
+            foreach (var group in query2)
+            {
+                System.Console.WriteLine($"{group.Manufacturer.Name}: {group.Manufacturer.Headquarters}");
+                foreach (var car in group.Cars.OrderByDescending(c => c.Combined).Take(2))
+                {
+                    System.Console.WriteLine($"\t{car.Name}: {car.Combined}");
+                }
+            }   
+        }
+            //Find the top three fuel effcient cars by country -
+            public static void FuelEffciencyByCountry(List<Car> cars, List<Manufacturer> manufacturers){
+            //TODO
+
+            }
+        
+        //Examples of using Func & Action with lamda   
         public static Func<int, int> square = x => x * x;
         public static Func<int,int,int> add = (x ,y) => x + y;
         public static Action<int> write = x => System.Console.WriteLine(x);
@@ -50,6 +217,39 @@ namespace DotNetFun
             }
             return count;
         }
-    }
 
+        public static IEnumerable<T> Filter<T>(this IEnumerable<T> sourceData, Func<T,bool> predicate){
+            
+            foreach (var item in sourceData)
+            {
+                if(predicate(item)){
+                    yield return item;
+                }                
+            }
+        }
+        //Generates a random infinitly long sequence
+        public static IEnumerable<double> Random(){
+            var random = new Random();
+            while(true){
+                yield return random.NextDouble();
+            }
+        }
+
+        public static IEnumerable<Car> ToCar(this IEnumerable<string> source){
+            foreach (var line in source)
+            {    
+                var cols = line.Split(',');
+                    yield return new Car{
+                    Year = int.Parse(cols[0]),
+                    Manufacturer = cols[1],
+                    Name = cols[2],
+                    Displacement = double.Parse(cols[3]),
+                    Cylinders = int.Parse(cols[4]),
+                    City = int.Parse(cols[5]),
+                    Highway = int.Parse(cols[6]),
+                    Combined = int.Parse(cols[7])
+                };
+            };
+        }
+    }
 }
