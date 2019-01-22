@@ -199,9 +199,50 @@ namespace DotNetFun
         }
             //Find the top three fuel effcient cars by country -
             public static void FuelEffciencyByCountry(List<Car> cars, List<Manufacturer> manufacturers){
-            //TODO
+            var query = from m in manufacturers
+                        join c in cars on m.Name equals c.Manufacturer
+                            into carGroup
+                        select new {
+                            Manufacturer = m,
+                            Cars = carGroup
+                        } into result //Group the output by headquarters
+                        group result by result.Manufacturer.Headquarters;
+
+            var query2 = manufacturers.GroupJoin(cars, m => m.Name, c => c.Manufacturer, 
+                                        (m,g) => new{
+                                            Manufacturer = m,
+                                            Cars = g
+                                            }).GroupBy(m => m.Manufacturer.Headquarters); 
+
+            foreach (var group in query2)
+            {
+                System.Console.WriteLine($"{group.Key}");
+                    //Use selectMany to flatten the car group under each manufactuer
+                foreach (var car in group.SelectMany(g => g.Cars).OrderByDescending(c => c.Combined).Take(3))
+                {
+                    System.Console.WriteLine($"\t{car.Name}: {car.Combined}");
+                }
+            }   
 
             }
+
+        //Using Linq aggregation features
+        public static void Aggregation(List<Car> cars, List<Manufacturer> manufacturers){
+            var query = from car in cars
+                group car by car.Manufacturer into carGroup
+                    select new 
+                    {
+                        Name = carGroup.Key,
+                        Max = carGroup.Max(c => c.Combined),
+                        Min = carGroup.Min(c => c.Combined),
+                        Avg = carGroup.Average(c => c.Combined)
+                    };
+
+            foreach (var result in query)
+            {
+                System.Console.WriteLine($"{result.Name} \n\tMax:{result.Max}, \n\tMin:{result.Min}, \n\tAvg:{result.Avg}");
+            }
+        }
         
         //Examples of using Func & Action with lamda   
         public static Func<int, int> square = x => x * x;

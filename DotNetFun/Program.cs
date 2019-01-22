@@ -163,8 +163,11 @@ namespace DotNetFun
             // System.Console.WriteLine("\n**********************\n");
             // LinqPractice.GroupJoinData(cars, manufacturers);
             
+            // System.Console.WriteLine("\n**********************\n");
+            // LinqPractice.FuelEffciencyByCountry(cars, manufacturers);
+            
             System.Console.WriteLine("\n**********************\n");
-            LinqPractice.FuelEffciencyByCountry(cars, manufacturers);
+            LinqPractice.Aggregation(cars,manufacturers);
 
             #endregion
 
