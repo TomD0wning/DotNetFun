@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
+using System.Xml.Linq;
 
 namespace DotNetFun
 {
@@ -71,6 +72,28 @@ namespace DotNetFun
                 System.Console.WriteLine(ex.Message);
             }
             return new List<Manufacturer>();
+        }
+
+        public static void CsvToXml(string filename){
+            var records = ProcessFuelFile("../fuel.csv");
+
+            var document = new XDocument();
+            var cars = new XElement("Cars");
+
+            //long way to add each record to doc
+            foreach (var record in records)
+            {
+                var name = new XElement("Name", record.Name);
+                var combined = new XElement("Combined", record);
+                var car = new XElement("Car", name, combined);
+
+                car.add(name);
+                car.add(combined);
+                cars.add(car);
+            }
+
+            document.add(cars);
+            document.Save("../fuel.xml");
         }
     }
 

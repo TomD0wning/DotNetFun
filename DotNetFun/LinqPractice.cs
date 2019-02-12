@@ -223,15 +223,13 @@ namespace DotNetFun
                     System.Console.WriteLine($"\t{car.Name}: {car.Combined}");
                 }
             }   
-
             }
-
         //Using Linq aggregation features
         public static void Aggregation(List<Car> cars, List<Manufacturer> manufacturers){
             var query = from car in cars
                 group car by car.Manufacturer into carGroup
                     select new 
-                    {
+                    { //Linq will loop over the data set 3 times, once for eacg aggregation.
                         Name = carGroup.Key,
                         Max = carGroup.Max(c => c.Combined),
                         Min = carGroup.Min(c => c.Combined),
@@ -243,11 +241,63 @@ namespace DotNetFun
                 System.Console.WriteLine($"{result.Name} \n\tMax:{result.Max}, \n\tMin:{result.Min}, \n\tAvg:{result.Avg}");
             }
         }
+
+        //Using the extension methods allows the calculation to be performed once per loop of the dataset
+        public static void AggregationUsingExtensionMethods(List<Car> cars, List<Manufacturer> manufacturers){
+            var query = cars.GroupBy(c => c.Manufacturer)
+                        .Select(g => {
+                            var results = g.Aggregate(new CarStatistics(), (acc,c) => acc.Accumulate(c), acc => acc.Compute());
+                            return new {
+                                Name = g.Key,
+                                Max = results.Max,
+                                Min = results.Min,
+                                Avg = results.Avg
+
+                            };
+                        }).OrderByDescending(c => c.Max);
+
+            foreach (var result in query)
+            {
+                System.Console.WriteLine($"{result.Name} \n\tMax:{result.Max}, \n\tMin:{result.Min}, \n\tAvg:{result.Avg}");
+            }
+        }
+
+        public static SelectingFoodsFromDB(){
+            
+        }
         
         //Examples of using Func & Action with lamda   
         public static Func<int, int> square = x => x * x;
         public static Func<int,int,int> add = (x ,y) => x + y;
         public static Action<int> write = x => System.Console.WriteLine(x);
+        public static Action<string> eatFood = x => System.Console.WriteLine($"Eating: {x}");
+    }
+
+    public class CarStatistics{
+        public int Max { get; set; }
+        public int Min { get; set; }
+        public double Avg { get; set; }
+        public int Total { get; set; }
+        public int CarCount { get; set; }
+
+
+        public CarStatistics ()
+        {   
+            Max = Int32.MinValue;
+            Min = Int32.MaxValue;
+        }
+
+        public  CarStatistics Accumulate(Car car){
+        Total += car.Combined;
+        CarCount+=1;
+        Max = Math.Max(Max,car.Combined);
+        Min = Math.Min(Min,car.Combined);
+            return this;
+        }
+        public CarStatistics Compute(){
+            Avg = Total/CarCount;
+            return this;
+        }
     }
     public static class MyLinq{
         //Example of creating a generic extension method
